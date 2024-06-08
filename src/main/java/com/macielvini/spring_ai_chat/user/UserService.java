@@ -14,10 +14,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public String connect(User user) {
+    public User connect() {
+        User user = new User();
         user.setStatus(ONLINE);
-        User savedUser = userRepository.save(user);
-        return savedUser.getId();
+        userRepository.save(user);
+        return user;
     }
 
     public void disconnect(User user) {
