@@ -11,14 +11,11 @@ import static com.macielvini.spring_ai_chat.user.Status.ONLINE;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-
     private final UserRepository userRepository;
 
-    public User connect() {
-        User user = new User();
+    public void connect(User user) {
         user.setStatus(ONLINE);
         userRepository.save(user);
-        return user;
     }
 
     public void disconnect(User user) {

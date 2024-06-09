@@ -15,10 +15,10 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @MessageMapping("/user.connect")
+    @MessageMapping("/user.addUser")
     @SendTo("/user/topic")
-    public User connectUser() {
-        return userService.connect();
+    public void addUser(@Payload User user) {
+        userService.connect(user);
     }
 
     @MessageMapping("/user.disconnect")
