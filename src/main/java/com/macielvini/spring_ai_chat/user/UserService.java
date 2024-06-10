@@ -15,6 +15,9 @@ public class UserService {
 
     public void connect(User user) {
         user.setStatus(ONLINE);
+
+        if (checkIfNicknameExists(user.getNickname())) return;
+
         userRepository.save(user);
     }
 
@@ -29,5 +32,9 @@ public class UserService {
 
     public List<User> findConnectedUsers() {
         return userRepository.findAllByStatus(ONLINE);
+    }
+
+    private boolean checkIfNicknameExists(String nickname) {
+        return userRepository.findByNickname(nickname).isPresent();
     }
 }
