@@ -15,9 +15,6 @@ public class UserService {
 
     public void connect(User user) {
         user.setStatus(ONLINE);
-
-        if (checkIfNicknameExists(user.getNickname())) return;
-
         userRepository.save(user);
     }
 
