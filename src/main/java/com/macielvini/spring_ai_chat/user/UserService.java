@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public void disconnect(User user) {
-        var storedUser = userRepository.findById(user.getId()).orElse(null);
+        var storedUser = userRepository.findById(user.getNickname()).orElse(null);
 
         if (storedUser != null) {
             storedUser.setStatus(OFFLINE);
