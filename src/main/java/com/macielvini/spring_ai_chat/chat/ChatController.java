@@ -18,9 +18,9 @@ public class ChatController {
     private final SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/chat")
-    public void processMessage(@Payload ChatMessage message) {
+    public void processMessage(@Payload ChatMessagePayloadDto message) {
         ChatMessage savedMessage = chatMessageService.save(message);
-        messagingTemplate.convertAndSendToUser(message.getRecipientId(), "/queue/messages", ChatNotification.builder()
+        messagingTemplate.convertAndSendToUser(message.recipientId(), "/queue/messages", ChatNotification.builder()
                 .chatId(savedMessage.getChatId())
                 .senderId(savedMessage.getSenderId())
                 .recipientId(savedMessage.getRecipientId())

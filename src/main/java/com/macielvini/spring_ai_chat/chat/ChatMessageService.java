@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,12 +14,18 @@ public class ChatMessageService {
     private final ChatRoomService chatRoomService;
     private final ChatMessageRepository messageRepository;
 
-    public ChatMessage save(ChatMessage chatMessage) {
+    public ChatMessage save(ChatMessagePayloadDto chatMessage) {
         var chatId = chatRoomService
-                .getChatRoomId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true)
+                .getChatRoomId(chatMessage.senderId(), chatMessage.recipientId(), true)
                 .orElseThrow();
-        chatMessage.setChatId(chatId);
-        return messageRepository.save(chatMessage);
+
+        return messageRepository.save(ChatMessage.builder()
+                .chatId(chatId)
+                .senderId(chatMessage.senderId())
+                .recipientId(chatMessage.recipientId())
+                .content(chatMessage.content())
+                .timestamp(new Date())
+                .build());
     }
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
