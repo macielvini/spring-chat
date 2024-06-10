@@ -16,13 +16,14 @@ public class UserController {
     private final UserService userService;
 
     @MessageMapping("/user.addUser")
-    @SendTo("/user/topic")
-    public void addUser(@Payload User user) {
+    @SendTo("/user/public")
+    public User addUser(@Payload User user) {
         userService.connect(user);
+        return user;
     }
 
-    @MessageMapping("/user.disconnect")
-    @SendTo("/user/topic")
+    @MessageMapping("/user.disconnectUser")
+    @SendTo("/user/public")
     public User disconnectUser(@Payload User user) {
         userService.disconnect(user);
         return user;
