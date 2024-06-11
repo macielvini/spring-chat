@@ -39,7 +39,7 @@ public class UserService {
 
     @Scheduled(cron = CronExpressions.MIDNIGHT)
     private void wipeUsers() {
-        System.out.println("Wiping messages...");
+        System.out.println("Wiping users...");
         this.userRepository.deleteAll();
     }
 }

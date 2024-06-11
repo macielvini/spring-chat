@@ -37,7 +37,7 @@ public class ChatRoomService {
     }
 
     @Scheduled(cron = CronExpressions.MIDNIGHT)
-    private void wipeMessages() {
+    private void wipeChatRooms() {
         System.out.println("Wiping chat rooms...");
         this.chatRoomRepository.deleteAll();
     }
