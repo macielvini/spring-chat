@@ -82,12 +82,7 @@ async function onMessageReceived(payload) {
     if (notifiedUser && !notifiedUser.classList.contains('active')) {
         const numberMsg = notifiedUser.querySelector('.nbr-msg');
         numberMsg.classList.remove('hidden');
-
-        if (!isNaN(Number(numberMsg.textContent))) {
-            numberMsg.textContent = (Number(numberMsg.textContent) + 1).toString();
-        } else {
-            numberMsg.textContent = '1';
-        }
+        numberMsg.textContent = '';
     }
 }
 
@@ -114,10 +109,6 @@ function appendUserElement(user, connectedUsersList) {
     const listItem = document.createElement('li');
     listItem.classList.add('user-item');
     listItem.id = user.nickname;
-
-    // const userImage = document.createElement('img');
-    // userImage.src = '../assets/user_icon.png';
-    // userImage.alt = 'Icone de usuário';
 
     const statusSpan = document.createElement('span');
 
@@ -206,6 +197,3 @@ function sendMessage(event) {
     messageInput.value = '';
     event.preventDefault();
 }
-
-
-
