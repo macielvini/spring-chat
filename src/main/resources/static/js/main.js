@@ -59,11 +59,11 @@ function onConnected() {
         JSON.stringify({nickname, name, status: 'ONLINE'}),
     );
     document.querySelector('#connected-user-fullname').textContent = name;
-    findAndDisplayConnectedUsers().then();
+    findAndDisplayUsers().then();
 }
 
 async function onMessageReceived(payload) {
-    await findAndDisplayConnectedUsers();
+    await findAndDisplayUsers();
     const message = JSON.parse(payload.body);
 
     // display message and scroll if message is from selected user
@@ -82,11 +82,16 @@ async function onMessageReceived(payload) {
     if (notifiedUser && !notifiedUser.classList.contains('active')) {
         const numberMsg = notifiedUser.querySelector('.nbr-msg');
         numberMsg.classList.remove('hidden');
-        numberMsg.textContent = '';
+
+        if (!isNaN(Number(numberMsg.textContent))) {
+            numberMsg.textContent = (Number(numberMsg.textContent) + 1).toString();
+        } else {
+            numberMsg.textContent = '1';
+        }
     }
 }
 
-async function findAndDisplayConnectedUsers() {
+async function findAndDisplayUsers() {
     const res = await fetch('/users');
     let connectedUsers = await res.json();
 
@@ -110,9 +115,19 @@ function appendUserElement(user, connectedUsersList) {
     listItem.classList.add('user-item');
     listItem.id = user.nickname;
 
-    const userImage = document.createElement('img');
-    userImage.src = '../assets/user_icon.png';
-    userImage.alt = 'Icone de usuário';
+    // const userImage = document.createElement('img');
+    // userImage.src = '../assets/user_icon.png';
+    // userImage.alt = 'Icone de usuário';
+
+    const statusSpan = document.createElement('span');
+
+    if (user.status === 'ONLINE') {
+        statusSpan.classList.add('status', 'online');
+        statusSpan.textContent = 'ONLINE';
+    } else {
+        statusSpan.classList.add('status', 'offline');
+        statusSpan.textContent = 'OFFLINE';
+    }
 
     const usernameSpan = document.createElement('span');
     usernameSpan.textContent = user.name;
@@ -121,7 +136,7 @@ function appendUserElement(user, connectedUsersList) {
     newMsgIcon.textContent = '';
     newMsgIcon.classList.add('nbr-msg', 'hidden');
 
-    listItem.appendChild(userImage);
+    listItem.appendChild(statusSpan);
     listItem.appendChild(usernameSpan);
     listItem.appendChild(newMsgIcon);
 
@@ -145,6 +160,7 @@ function userItemClick(event) {
 
     const numberMessages = clickedUser.querySelector('.nbr-msg');
     numberMessages.classList.add('hidden');
+    numberMessages.textContent = '';
 }
 
 async function fetchAndDisplayUserChat() {
