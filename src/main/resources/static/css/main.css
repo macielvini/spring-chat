@@ -102,12 +102,10 @@ input {
 .chat-container {
     display: grid;
     grid-template-columns: 1fr;
-    min-height: 600px;
-    max-height: 600px;
+    height: 600px;
     width: 100%;
     margin: 20px;
     background-color: var(--bg-main-color);
-    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -125,12 +123,14 @@ input {
     display: none;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 
 .users-list-container {
     height: 100%;
     overflow-y: auto;
+    padding-right: 10px;
 }
 
 .users-list h2 {
@@ -153,6 +153,13 @@ input {
 
 .user-item > span:nth-of-type(2) {
     text-transform: lowercase;
+    max-width: 60%;
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-item.active {
@@ -174,7 +181,7 @@ input {
 
 .user-item .status {
     margin-right: 10px;
-    width: 4rem;
+    min-width: 4rem;
     text-align: center;
     border-radius: 6px;
     font-size: 12px;
@@ -209,6 +216,8 @@ input {
     box-sizing: border-box;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+
+    overflow: hidden;
 }
 
 .message-input button {
@@ -224,9 +233,10 @@ input {
 
 #chat-messages {
     display: flex;
-    flex: 1;
     flex-direction: column;
     overflow-y: auto;
+
+    padding-bottom: 1rem;
 }
 
 .message p {
@@ -236,13 +246,18 @@ input {
 }
 
 .user-item span.nbr-msg {
+    font-size: 10px;
+    text-align: center;
+
+    width: fit-content;
+    min-width: 10px;
+    height: 10px;
     margin-left: 10px;
+    padding: 5px;
+    border-radius: 50%;
+
     background-color: var(--notification-bg-color);
     color: var(--notification-text-color);
-    padding: 5px;
-    width: 10px;
-    border-radius: 50%;
-    height: 10px;
 }
 
 .sender {
@@ -325,7 +340,8 @@ a.logout:hover {
 }
 
 .connected-users {
-    overflow: auto;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 #connected-user-fullname {
@@ -365,6 +381,8 @@ a.logout:hover {
 @media (min-width: 768px) {
     .users-list {
         display: flex;
+        flex: 1;
+        flex-direction: column;
     }
 
     .chat-container {
@@ -384,4 +402,19 @@ a.logout:hover {
     .chat-area {
         grid-column: span 3;
     }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    padding: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bg-secondary-color);
+    margin-bottom: 1rem;
 }
