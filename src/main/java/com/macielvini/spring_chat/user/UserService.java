@@ -1,14 +1,14 @@
-package com.macielvini.spring_ai_chat.user;
+package com.macielvini.spring_chat.user;
 
-import com.macielvini.spring_ai_chat.config.CronExpressions;
+import com.macielvini.spring_chat.config.CronExpressions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.macielvini.spring_ai_chat.user.Status.OFFLINE;
-import static com.macielvini.spring_ai_chat.user.Status.ONLINE;
+import static com.macielvini.spring_chat.user.Status.OFFLINE;
+import static com.macielvini.spring_chat.user.Status.ONLINE;
 
 @Service
 @RequiredArgsConstructor

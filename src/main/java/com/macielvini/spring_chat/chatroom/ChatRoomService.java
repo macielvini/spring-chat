@@ -1,6 +1,6 @@
-package com.macielvini.spring_ai_chat.chatroom;
+package com.macielvini.spring_chat.chatroom;
 
-import com.macielvini.spring_ai_chat.config.CronExpressions;
+import com.macielvini.spring_chat.config.CronExpressions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

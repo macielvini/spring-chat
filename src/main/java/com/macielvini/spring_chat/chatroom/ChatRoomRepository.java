@@ -1,4 +1,4 @@
-package com.macielvini.spring_ai_chat.chatroom;
+package com.macielvini.spring_chat.chatroom;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

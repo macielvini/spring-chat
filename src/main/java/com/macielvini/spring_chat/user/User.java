@@ -1,4 +1,4 @@
-package com.macielvini.spring_ai_chat.user;
+package com.macielvini.spring_chat.user;
 
 import lombok.Getter;
 import lombok.Setter;

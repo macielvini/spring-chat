@@ -1,10 +1,8 @@
-package com.macielvini.spring_ai_chat.chat;
+package com.macielvini.spring_chat.chatroom;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -12,12 +10,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Document
-public class ChatMessage {
+public class ChatRoom {
     @Id
     private String id;
     private String chatId;
     private String senderId;
     private String recipientId;
-    private String content;
-    private Date timestamp;
 }

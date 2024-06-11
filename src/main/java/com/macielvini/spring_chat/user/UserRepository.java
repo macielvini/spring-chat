@@ -1,4 +1,4 @@
-package com.macielvini.spring_ai_chat.user;
+package com.macielvini.spring_chat.user;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
