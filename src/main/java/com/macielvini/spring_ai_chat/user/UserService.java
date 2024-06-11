@@ -27,8 +27,8 @@ public class UserService {
         }
     }
 
-    public List<User> findConnectedUsers() {
-        return userRepository.findAllByStatus(ONLINE);
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
     private boolean checkIfNicknameExists(String nickname) {
