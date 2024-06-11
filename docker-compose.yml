@@ -9,9 +9,12 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
   mongo-express:
     image: mongo-express
     container_name: mongo_express
+    depends_on:
+      - mongodb
     restart: always
     ports:
       - 8081:8081
@@ -19,6 +22,19 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGODB_USER}
       - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}
       - ME_CONFIG_MONGODB_SERVER=mongodb
+  app:
+    build:
+      context: .
+    container_name: chat_app
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_USER=${MONGODB_USER}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=${MONGODB_PORT}
+    ports:
+      - 8088:8088
 
 volumes:
   mongo: { }
