@@ -1,10 +1,10 @@
 spring:
   data:
     mongodb:
-      username: admin
-      password: pass
-      host: localhost
-      port: 27017
+      username: ${MONGODB_USER:admin}
+      password: ${MONGODB_PASSWORD:admin}
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
       database: chat_app
       authentication-database: admin
 server:
