@@ -1,6 +1,8 @@
 package com.macielvini.spring_ai_chat.user;
 
+import com.macielvini.spring_ai_chat.config.CronExpressions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +35,11 @@ public class UserService {
 
     private boolean checkIfNicknameExists(String nickname) {
         return userRepository.findByNickname(nickname).isPresent();
+    }
+
+    @Scheduled(cron = CronExpressions.MIDNIGHT)
+    private void wipeUsers() {
+        System.out.println("Wiping messages...");
+        this.userRepository.deleteAll();
     }
 }

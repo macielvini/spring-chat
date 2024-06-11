@@ -1,7 +1,9 @@
 package com.macielvini.spring_ai_chat.chat;
 
 import com.macielvini.spring_ai_chat.chatroom.ChatRoomService;
+import com.macielvini.spring_ai_chat.config.CronExpressions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,5 +34,11 @@ public class ChatMessageService {
         var chatId = chatRoomService
                 .getChatRoomId(senderId, recipientId, false);
         return chatId.map(messageRepository::findAllByChatId).orElse(new ArrayList<>());
+    }
+
+    @Scheduled(cron = CronExpressions.MIDNIGHT)
+    private void wipeMessages() {
+        System.out.println("Wiping messages...");
+        this.messageRepository.deleteAll();
     }
 }
