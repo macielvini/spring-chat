@@ -90,7 +90,9 @@ async function findAndDisplayUsers() {
     const res = await fetch('/users');
     let connectedUsers = await res.json();
 
-    connectedUsers = connectedUsers.filter(user => user.nickname !== nickname);
+    connectedUsers = connectedUsers
+        .filter(user => user.nickname !== nickname)
+        .sort((a, b) => (a.status === 'ONLINE' ? -1 : 1));
 
     const connectedUsersList = document.querySelector('#connected-users');
     connectedUsersList.innerHTML = '';
